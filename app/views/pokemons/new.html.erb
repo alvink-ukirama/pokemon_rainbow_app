@@ -1,0 +1,17 @@
+<div class="container text-center inline">
+    <h1 class="center text-dark">Catch Pokemon!</h1>
+</div>
+
+<div class="container bg-light">
+  <div>
+    <%= form_with(model: @pokemon, local: true) do |f| %>
+      <div class="form-group">
+        <%= f.label :pokemon_id%>
+        <%= f.select "pokemon_id", @pokedexes.map { |p| [p.name.capitalize, p.id]}, {:include_blank => "Pokemon"}, class: "form-select form-select-lg" %>
+      </div>
+      <div class="text-center">
+        <%= f.submit "Catch!", class: "btn btn-primary btn-lg text-center" %>
+      </div>
+    <% end %>
+  </div>
+</div>

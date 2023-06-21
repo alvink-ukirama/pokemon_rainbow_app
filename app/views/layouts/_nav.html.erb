@@ -1,0 +1,30 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+  <div class="w-100 d-flex flex-row justify-content-between align-items-center">
+    <div>
+      <%= link_to root_path do %>
+        <%= image_tag "pokemon_logo.png", width: "219px", height: "69px"%>
+      <% end %>
+    </div>
+    <div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse fs-1" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to "Battle", new_pokemon_battle_path, class: "nav-link" %>
+          </li>
+           <li class="nav-item">
+            <%= link_to "Pokemon", pokemons_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Pokedex", pokedexes_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Skill", skills_path, class: "nav-link" %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

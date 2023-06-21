@@ -1,0 +1,86 @@
+<%= form_for @pokemon do |f| %>
+  
+  <div class="container text-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <%= link_to "Delete", pokemon_path(params[:id]), method: :delete, class: "btn btn-danger btn-lg" %>
+    </div>
+  </div>
+
+  <div class="container text-center mb-3">
+    <div class="row align-items-start">
+      <div class="col">
+          <%= image_tag @pokemon.image_url, style: "width: 450px; height: 450px" %>
+      </div>
+      <div class="container col text-start bg-light">
+        <div>
+          <div class="row mb-3">
+            <%= f.label :name, "Name"%>
+            <%= f.text_field :name, class: 'form-control', placeholder: 'Name..' %>
+          </div>
+          <div class="row mb-3">
+            <%= f.label :element_type, "Element Type"%>
+            <%= f.select :element_type, Elements::ELEMENT_TYPE.map {|e| [e.capitalize, e]}, {:include_blank => "Element Type"}, class: "form-select form-select-lg" %>
+          </div>
+          <div class="row mb-3">
+            <%= f.label :current_health_point, "HP"%>
+            <%= f.text_field :current_health_point, class: 'form-control', placeholder: 'HP..' %>
+          </div>
+          <div class="row mb-3">
+            <%= f.label :attack, "Attack"%>
+            <%= f.text_field :attack, class: 'form-control', placeholder: 'Attack..' %>
+          </div>
+          <div class="row mb-3">
+            <%= f.label :defense, "Defence"%>
+            <%= f.text_field :defense, class: 'form-control', placeholder: 'Defence..' %>
+          </div>
+          <div class="row mb-3">
+            <%= f.label :speed, "Speed"%>
+            <%= f.text_field :speed, class: 'form-control', placeholder: 'Speed..' %>
+          </div>
+          <div class="row mb-3">
+            <%= f.label :image_url, "Image URL"%>
+            <%= f.text_field :image_url, class: 'form-control', placeholder: 'Image URL..' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container text-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <%= link_to "Add Skill", '#', id: 'addRowLink', class: "btn btn-success btn-lg" %>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <table class="table">
+      <thead class="text-center">
+        <tr>
+          <th scope="col" class="text-center">Name</th>
+          <th scope="col" class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody" class="text-center">
+        <% @pokemon.pokemon_skills.each do |p_skill| %>
+          <%= f.fields_for :pokemon_skills_attributes do |ps| %>
+            <tr>
+              <%= ps.hidden_field :pokemon_id %> 
+              <td><%= ps.select "skill_id", options_from_collection_for_select(@skill, "id", "name", p_skill.skill_id), {:include_blank => "Move"}, class: "form-select form-select-lg" %></td>
+              <td> <%= link_to "Delete Move", pokemon_skill_path(params[:id]), method: :delete, class: "btn btn-danger btn-lg" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        <tr id="templateRow" style="display: none;">
+          <td><%= f.select "pokemon_skills", @skill.map {|s| [s.name, s.id]}, { include_blank: "Move" }, class: "form-select form-select-lg" %></td>
+          <td><%= link_to "Delete Move", pokemon_skill_path(params[:id]), method: :delete, class: "btn btn-danger btn-lg" %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-center">
+    <%= f.submit "Edit", class: "btn btn-primary btn-lg text-center" %>
+  </div>
+<% end %>
+
+<%= javascript_include_tag 'add_row', 'data-turbolinks-eval' => 'false' %>

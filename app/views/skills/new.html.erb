@@ -1,0 +1,30 @@
+<div class="container text-center inline">
+    <h1 class="text-dark">Add Skill</h1>
+</div>
+
+<div class="container bg-light">
+  <div>
+    <%= form_with(model: @skill, local: true) do |f| %>
+      <div class="form-group">
+        <%= f.label :name, "Name"%>
+        <%= f.text_field :name, class: 'form-control', placeholder: 'Name..' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :power, "Power"%>
+        <%= f.text_field :power, class: 'form-control', placeholder: 'HP..' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :max_pp, "Max PP"%>
+        <%= f.text_field :max_pp, class: 'form-control', placeholder: 'Attack..' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :element_type, "Element Type"%>
+        <%= f.select :element_type, Elements::ELEMENT_TYPE.map {|e| [e.capitalize, e]}, {:include_blank => "Element Type"}, class: "form-select form-select-lg" %>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit "Submit", class: "btn btn-primary btn-lg text-center" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container text-center">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <%= button_to "Heal", heal_path, class: "btn btn-success btn-lg" %>
+    <%= link_to "Edit", edit_pokemon_path(params[:id]), class: "btn btn-warning btn-lg" %>
+    <%= link_to "Delete", pokemon_path(params[:id]), method: :delete, class: "btn btn-danger btn-lg" %>
+  </div>
+</div>
+
+<div class="container text-center">
+  <div class="row align-items-start">
+    <div class="col">
+        <%= image_tag @pokemon.image_url, style: "width: 450px; height: 450px" %>
+    </div>
+     <div class="col text-start">
+      <div class="bg-light">
+        <h1 class="text-dark"><%= @pokemon.name.capitalize %></h1>
+        <p class="fs-1">Element Type : <%= @pokemon.element_type.capitalize %></p>
+        <p class="fs-1">HP : <%= @pokemon.current_health_point %></p>
+        <p class="fs-1">Attack : <%= @pokemon.attack %></p>
+        <p class="fs-1">Defence : <%= @pokemon.defense %></p>
+        <p class="fs-1">Speed : <%= @pokemon.speed %></p>
+      </div> 
+    </div>
+  </div>
+</div>
+
+<div class="container text-center">
+  <table class="table">
+    <thead  class="text-center">
+      <tr>
+        <th scope="col" class="text-center">Name</th>
+        <th scope="col" class="text-center">Power</th>
+        <th scope="col" class="text-center">Max PP</th>
+        <th scope="col" class="text-center">Current PP</th>
+        <th scope="col" class="text-center">Element Type</th>
+        <th scope-"col" class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody  class="text-center">
+      <% @pokemon.pokemon_skills.each do |pokemon_skill| %>
+        <tr>
+          <td><%= pokemon_skill.skill.name.capitalize %></td>
+          <td><%= pokemon_skill.skill.power %></td>
+          <td><%= pokemon_skill.skill.max_pp%></td>
+          <td><%= pokemon_skill.current_pp%></td>
+          <td><%= pokemon_skill.skill.element_type.capitalize %></td>
+          <td><%= link_to "Delete Move", pokemon_skill_path(pokemon_skill.id), method: :delete, class: "btn btn-danger btn-lg" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+    <%= form_with(model: @pokemon_skill, url: pokemon_pokemon_skills_path(@pokemon), local: true) do |f| %>
+      <%= f.hidden_field :pokemon_id, value: @pokemon.id %>
+      <div class="row mb-3">
+        <%= f.label :skill_id, "Skill"%>
+        <%= f.select :skill_id, @skill.map { |s| [s.name.capitalize, s.id]}, { include_blank: "Move" }, class: "form-select form-select-lg" %>
+      </div>
+      <div class="row mb-3">
+        <%= f.submit "Add Skill", class: "btn btn-success btn-lg text-center" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container text-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <%= button_to "Heal All", heal_all_path, class: "btn btn-success btn-lg" %>
+      <%= link_to "New", new_pokemon_path, class: "btn btn-success btn-lg" %>
+    </div>
+    <h1 class="text-dark">Pokemon</h1>
+</div>
+
+<div class="container">
+  <table class="table">
+    <thead  class="text-center">
+      <tr>
+        <th scope="col" class="text-center">No.</th>
+        <th scope="col" class="text-center">Image</th>
+        <th scope="col" class="text-center">Name</th>
+        <th scope="col" colspan="3"  class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody  class="text-center">
+      <% @pokemons.each do |pokemon| %>
+        <tr>
+          <td><%= pokemon.id %></td>
+          <td><%= image_tag pokemon.image_url, style: "width: 100px; height: 100px" %></td>
+          <td><%= pokemon.name.capitalize %></td>
+          <td><%= link_to "Show", pokemon_path(pokemon), class: "btn btn-primary btn-lg" %></td>
+          <td><%= link_to "Edit", edit_pokemon_path(pokemon), class: "btn btn-warning btn-lg" %></td>
+          <td><%= link_to "Delete", pokemon_path(pokemon), method: :delete, class: "btn btn-danger btn-lg" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="float-end">
+    <%= will_paginate %>
+  </div>
+</div>

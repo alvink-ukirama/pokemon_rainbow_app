@@ -1,0 +1,30 @@
+<div class="container text-center inline">
+    <%= link_to "New", new_pokedex_path, class: "btn btn-success btn-lg float-end" %>
+    <h1 class="text-dark">Pokedex</h1>
+</div>
+
+<div class="container">
+    <table class="table">
+      <thead  class="text-center">
+        <tr>
+          <th scope="col" class="text-center">No.</th>
+          <th scope="col" class="text-center">Image</th>
+          <th scope="col" class="text-center">Name</th>
+          <th scope="col" class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody  class="text-center">
+        <% @pokedexes.each do |pokedex| %>
+          <tr>
+              <td><%= pokedex.id %></td>
+              <td><%= image_tag pokedex.image_url, style: "width: 100px; height: 100px" %></td>
+              <td><%= pokedex.name.capitalize %></td>
+              <td><%= link_to "Show", pokedex_path(pokedex), class: "btn btn-primary btn-lg" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="float-end">
+        <%= will_paginate %>
+    </div>
+</div>

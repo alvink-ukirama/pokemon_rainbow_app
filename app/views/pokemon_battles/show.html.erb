@@ -1,0 +1,42 @@
+<%= form_with(url: attack_path, local: true) do |f| %>
+    <div class="container">
+        <div class="row text-center justify-content-between">
+            <div class="col-md-6 mb-4">
+                <h1 class="text-dark">Pokemon 1</h1>
+                <%= image_tag @pokemon_battle.pokemon1.image_url, style: 'width: 275px; height: 275px'%>
+                <h2 class="text-dark"><%= @pokemon_battle.pokemon1.name.capitalize %></h2>
+                <h4 class="text-dark">HP: <%= @pokemon_battle.pokemon1.current_health_point %>/<%= @pokemon_battle.pokemon1.max_health_point %></h4>
+                <div class="d-flex justify-content-center">
+                    <div class="w-15 row mb-3">
+                        <%= f.label :pokemon1_skill, "Skill", class:"col-sm-2 col-form-label" %>
+                        <div class="col-sm-10"><%= f.select :pokemon1_skill, @pokemon1_skills.map { |p| [p.skill.name.capitalize, p.skill.id] }, { include_blank: "-- Select --" }, class: "form-select form-select-lg",  disabled: (@disable_pokemon1_action_if_not_turn || @disable_all_action) %></div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="d-grid gap-2 d-md-flex justify-center">
+                        <%= f.submit "Attack", class: "btn btn-primary btn-lg", disabled: (@disable_pokemon1_action_if_not_turn || @disable_all_action) %>
+                        <%= link_to "Surrender", "#", class: "btn btn-danger btn-lg", disabled: (@disable_pokemon1_action_if_not_turn || @disable_all_action) %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <h1 class="text-dark">Pokemon 2</h1>
+                <%= image_tag @pokemon_battle.pokemon2.image_url, style: 'width: 275px; height: 275px'%>
+                <h2 class="text-dark"><%= @pokemon_battle.pokemon2.name.capitalize %></h2>
+                <h4 class="text-dark">HP: <%= @pokemon_battle.pokemon2.current_health_point %>/<%= @pokemon_battle.pokemon2.max_health_point %></h4>
+                <div class="d-flex justify-content-center">
+                    <div class="w-15 row mb-3">
+                        <%= f.label :pokemon2_skill, "Skill", class:"col-sm-2 col-form-label" %>
+                        <div class="col-sm-10"><%= f.select :pokemon2_skill, @pokemon2_skills.map { |p| [p.skill.name.capitalize, p.skill.id] }, { include_blank: "-- Select --" }, class: "form-select form-select-lg",  disabled: (@disable_pokemon2_action_if_not_turn||  @disable_all_action) %></div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="d-grid gap-2 d-md-flex justify-center">
+                        <%= f.submit "Attack", class: "btn btn-primary btn-lg", disabled: (@disable_pokemon2_action_if_not_turn || @disable_all_action) %>
+                        <%= link_to "Surrender", "#", class: "btn btn-danger btn-lg",  disabled: (@disable_pokemon2_action_if_not_turn ||  @disable_all_action) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

@@ -1,0 +1,35 @@
+<div class="container text-center">
+<%= link_to "New", new_skill_path, class: "btn btn-success btn-lg float-end" %>
+    <h1 class="text-dark">Skills</h1>
+</div>
+
+<div class="container">
+    <table class="table">
+      <thead  class="text-center">
+        <tr>
+          <th scope="col" class="text-center">ID.</th>
+          <th scope="col" class="text-center">Name</th>
+          <th scope="col" class="text-center">Power</th>
+          <th scope="col" class="text-center">Max PP</th>
+          <th scope="col" class="text-center">Element Type</th>
+          <th scope="col" colspan="3"  class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody  class="text-center">
+        <% @skills.each do |skill| %>
+            <tr>
+                <td><%= skill.id %></td>
+                <td><%= skill.name.capitalize %></td>
+                <td><%= skill.power %></td>
+                <td><%= skill.max_pp%></td>
+                <td><%= skill.element_type.capitalize %></td>
+                <td><%= link_to "Edit", edit_skill_path(skill), class: "btn btn-warning btn-lg" %></td>
+                <td><%= link_to "Delete", skill_path(skill), method: :delete, class: "btn btn-danger btn-lg" %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="float-end">
+        <%= will_paginate %>
+    </div>
+</div>

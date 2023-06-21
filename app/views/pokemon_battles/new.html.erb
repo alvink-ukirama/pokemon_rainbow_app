@@ -1,0 +1,49 @@
+<div class="container bg-light">
+  <div>
+    <%= form_with(model: @pokemon_battles, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="form-group">
+        <%= f.label :pokemon1_id, "Pokemon 1" %>
+        <%= f.select :pokemon1_id, @pokemons.map { |p| [p.name.capitalize, p.id]}, {}, class: "form-control form-control-lg" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :pokemon2_id, "Pokemon 2"%>
+        <%= f.select :pokemon2_id, @pokemons.map { |p| [p.name.capitalize, p.id]}, {}, class: "form-control form-control-lg" %>
+      </div>
+      <div class="text-center">
+        <%= f.submit "Play!", class: "btn btn-primary btn-lg text-center" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<script>
+  // Get references to both dropdowns
+  var firstDropdown = document.getElementById("pokemon_battle_player1_id");
+  var secondDropdown = document.getElementById("pokemon_battle_player2_id");
+
+  // Add an event listener to the first dropdown to disable the selected option in the second dropdown
+  firstDropdown.addEventListener("change", function() {
+    var selectedOption = this.value;
+    for (var i = 0; i < secondDropdown.options.length; i++) {
+      if (secondDropdown.options[i].value === selectedOption) {
+        secondDropdown.options[i].disabled = true;
+      } else {
+        secondDropdown.options[i].disabled = false;
+      }
+    }
+  });
+
+  // Add an event listener to the second dropdown to disable the selected option in the first dropdown
+  secondDropdown.addEventListener("change", function() {
+    var selectedOption = this.value;
+    for (var i = 0; i < firstDropdown.options.length; i++) {
+      if (firstDropdown.options[i].value === selectedOption) {
+        firstDropdown.options[i].disabled = true;
+      } else {
+        firstDropdown.options[i].disabled = false;
+      }
+    }
+  });
+  </script>

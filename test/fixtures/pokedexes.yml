@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  base_health_point: 
+  base_attack: 
+  base_defence: 
+  base_speed: 
+  element_type: 
+  image_url: MyString
+
+two:
+  name: 
+  base_health_point: 
+  base_attack: 
+  base_defence: 
+  base_speed: 
+  element_type: 
+  image_url: MyString
